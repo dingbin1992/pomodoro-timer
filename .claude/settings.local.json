@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(npx electron *)",
+      "Bash(npx electron-builder *)",
+      "Bash(fpm --version)",
+      "Bash(ruby --version)",
+      "Bash(docker --version)",
+      "Bash(gem install *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}

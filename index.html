@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>番茄钟</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- 标题栏 -->
+    <div class="titlebar">
+      <span class="titlebar-text">🍅 番茄钟</span>
+      <div class="titlebar-actions">
+        <button class="titlebar-btn" id="btn-minimize" title="最小化">─</button>
+        <button class="titlebar-btn" id="btn-close" title="关闭">✕</button>
+      </div>
+    </div>
+
+    <!-- 模式切换 -->
+    <div class="mode-tabs">
+      <button class="mode-tab active" data-mode="work">专注</button>
+      <button class="mode-tab" data-mode="short-break">短休</button>
+      <button class="mode-tab" data-mode="long-break">长休</button>
+    </div>
+
+    <!-- 计时器圆环 -->
+    <div class="timer-section">
+      <svg class="progress-ring" viewBox="0 0 200 200">
+        <defs>
+          <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ff9800" />
+            <stop offset="50%" stop-color="#e6517e" />
+            <stop offset="100%" stop-color="#7e57c2" />
+          </linearGradient>
+        </defs>
+        <circle class="progress-ring-bg" cx="100" cy="100" r="90" />
+        <circle class="progress-ring-fill" cx="100" cy="100" r="90" />
+      </svg>
+      <div class="timer-display">
+        <span class="timer-minutes">60</span>
+        <span class="timer-separator">:</span>
+        <span class="timer-seconds">00</span>
+      </div>
+    </div>
+
+    <!-- 控制按钮 -->
+    <div class="controls">
+      <button class="btn btn-primary" id="btn-toggle">
+        <span class="btn-icon">▶</span>
+        <span class="btn-text">开始</span>
+      </button>
+      <button class="btn btn-secondary" id="btn-reset">
+        <span class="btn-icon">↺</span>
+      </button>
+    </div>
+
+    <!-- 统计 -->
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-value" id="session-count">0</span>
+        <span class="stat-label">今日番茄</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="total-time">0 分钟</span>
+        <span class="stat-label">今日专注</span>
+      </div>
+    </div>
+
+    <!-- 番茄果实 -->
+    <div class="fruits" id="fruits-container"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

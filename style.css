@@ -1,0 +1,358 @@
+/* ========== 全局样式 ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --orange-100: #fff3e0;
+  --orange-300: #ffb74d;
+  --orange-400: #ffa726;
+  --orange-500: #ff9800;
+  --orange-600: #fb8c00;
+  --orange-700: #f57c00;
+  --purple-300: #b39ddb;
+  --purple-400: #9575cd;
+  --purple-500: #7e57c2;
+  --purple-600: #6a3fb5;
+  --purple-700: #512da8;
+  --purple-800: #4527a0;
+  --purple-900: #311b92;
+  --gradient-main: linear-gradient(135deg, #f57c00, #ff9800, #e6517e, #7e57c2, #512da8);
+  --gradient-bg: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 30%, #3d1050 60%, #1a0a2e 100%);
+  --text-light: #f3e5f5;
+  --text-muted: #b39ddb;
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-hover: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+body {
+  font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: transparent;
+  color: var(--text-light);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-app-region: no-drag;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.app-container {
+  width: 400px;
+  height: 580px;
+  background: var(--gradient-bg);
+  border-radius: 20px;
+  padding: 0 32px 24px;
+  box-shadow: var(--shadow), 0 0 0 1px var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 背景光晕 */
+.app-container::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 152, 0, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.app-container::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(126, 87, 194, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ========== 标题栏 ========== */
+.titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0 8px;
+  -webkit-app-region: drag;
+  position: relative;
+  z-index: 1;
+}
+
+.titlebar-text {
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.titlebar-actions {
+  display: flex;
+  gap: 6px;
+  -webkit-app-region: no-drag;
+}
+
+.titlebar-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.titlebar-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text-light);
+}
+
+#btn-close:hover {
+  background: rgba(255, 82, 82, 0.3);
+  color: #ff5252;
+}
+
+/* ========== 模式切换 ========== */
+.mode-tabs {
+  display: flex;
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 4px;
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.mode-tab {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.mode-tab.active {
+  background: var(--gradient-main);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+/* ========== 计时器圆环 ========== */
+.timer-section {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 24px 0 20px;
+}
+
+.progress-ring {
+  width: 220px;
+  height: 220px;
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 0 12px rgba(126, 87, 194, 0.3));
+}
+
+.progress-ring-bg {
+  fill: none;
+  stroke: var(--surface);
+  stroke-width: 6;
+}
+
+.progress-ring-fill {
+  fill: none;
+  stroke: url(#ring-gradient);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 565.48;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.timer-display {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.timer-minutes,
+.timer-seconds {
+  font-size: 56px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -1px;
+}
+
+.timer-minutes {
+  background: linear-gradient(180deg, #ffb74d 0%, #ff9800 40%, #f57c00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.timer-seconds {
+  background: linear-gradient(180deg, #b39ddb 0%, #7e57c2 40%, #512da8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.timer-separator {
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--purple-300);
+  margin-bottom: 6px;
+}
+
+/* ========== 控制按钮 ========== */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.btn {
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.btn-primary {
+  width: 64px;
+  height: 64px;
+  background: var(--gradient-main);
+  box-shadow: 0 4px 20px rgba(255, 152, 0, 0.35);
+  flex-direction: column;
+  gap: 2px;
+}
+
+.btn-primary:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 28px rgba(255, 152, 0, 0.5);
+}
+
+.btn-primary:active {
+  transform: scale(0.96);
+}
+
+.btn-primary .btn-icon {
+  font-size: 18px;
+}
+
+.btn-primary .btn-text {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  width: 44px;
+  height: 44px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 18px;
+}
+
+.btn-secondary:hover {
+  background: var(--surface-hover);
+  color: var(--text-light);
+}
+
+/* ========== 统计 ========== */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ========== 番茄果实 ========== */
+.fruits {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+  min-height: 28px;
+  align-items: center;
+}
+
+.fruit {
+  font-size: 20px;
+  animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  80% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ========== 跑步状态 ========== */
+.timer-section.running .progress-ring {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { filter: drop-shadow(0 0 12px rgba(126, 87, 194, 0.3)); }
+  50% { filter: drop-shadow(0 0 20px rgba(255, 152, 0, 0.5)); }
+}
