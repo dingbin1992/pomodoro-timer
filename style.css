@@ -92,7 +92,7 @@ body {
 }
 
 .titlebar-text {
-  font-size: 14px;
+  font-size: 28px;
   font-weight: 600;
   background: var(--gradient-main);
   -webkit-background-clip: text;
