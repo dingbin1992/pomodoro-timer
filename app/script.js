@@ -69,7 +69,7 @@ if (debugLabel) {
   setTimeout(() => {
     const fn = findTauriInvoke();
     if (fn) {
-      debugLabel.textContent = "牛马归位";
+      debugLabel.textContent = "牛马已就绪";
       debugLabel.style.color = "#4caf50";
     } else {
       const keys = window.__TAURI_INTERNALS__
