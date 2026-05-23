@@ -1,94 +1,21 @@
 {
   "name": "pomodoro-timer",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "橙紫配色番茄钟桌面应用",
   "author": {
     "name": "Pomodoro Timer",
     "email": "pomodoro@example.com"
   },
-  "homepage": "https://github.com/pomodoro-timer/pomodoro-timer",
-  "main": "main.js",
+  "main": "src-tauri/src/main.rs",
   "scripts": {
-    "start": "electron .",
-    "dist": "electron-builder",
-    "dist:win": "electron-builder --win",
-    "dist:mac": "electron-builder --mac",
-    "dist:linux": "electron-builder --linux",
-    "dist:all": "electron-builder --win --mac --linux"
-  },
-  "build": {
-    "appId": "com.pomodoro.timer",
-    "productName": "PomodoroTimer",
-    "icon": "static/icon.png",
-    "directories": {
-      "output": "release"
-    },
-    "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "portable",
-          "arch": [
-            "x64"
-          ]
-        }
-      ]
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "installerLanguages": [
-        "zh_CN",
-        "en_US"
-      ]
-    },
-    "mac": {
-      "target": [
-        {
-          "target": "dmg",
-          "arch": [
-            "x64",
-            "arm64"
-          ]
-        }
-      ],
-      "category": "public.app-category.productivity"
-    },
-    "linux": {
-      "target": [
-        {
-          "target": "deb",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "rpm",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "AppImage",
-          "arch": [
-            "x64"
-          ]
-        }
-      ],
-      "category": "Office",
-      "maintainer": "pomodoro@example.com"
-    }
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "build:linux": "tauri build --bundles deb,rpm,appimage",
+    "postbuild:linux": "node scripts/package-targz.js",
+    "tauri": "tauri",
+    "icon": "tauri icon static/icon.png"
   },
   "devDependencies": {
-    "electron": "^33.0.0",
-    "electron-builder": "^25.0.0"
-  },
-  "dependencies": {
-    "sharp": "^0.34.5"
+    "@tauri-apps/cli": "^2"
   }
 }
